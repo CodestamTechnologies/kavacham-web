@@ -170,7 +170,7 @@ const Footer = () => {
             transition={{ delay: 0.4 }}
             className="text-gray-500 text-sm"
           >
-           <a target='_blank' href="https://codestam.com/"> © Cinematickrs </a> . All rights reserved.
+            © Kavacham. All rights reserved.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
