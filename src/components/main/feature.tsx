@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 export default function CosmicUpdates() {
   return (
-    <div className={`min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-white ${poppins.className}`}>
+    <div className={`sm:min-h-[70vh] min-h-[60vh] py-12 px-4 sm:px-6 lg:px-8 bg-white ${poppins.className}`}>
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <motion.div

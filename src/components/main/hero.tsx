@@ -45,7 +45,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className={`relative w-full sm:overflow-hidden sm:h-screen h-auto bg-gray-50 flex flex-col items-center justify-center text-center px-4 ${poppins.className}`}
+    <section className={`relative w-full sm:overflow-hidden sm:h-screen lg-h-screen h-[60vh] bg-gray-50 flex flex-col items-center justify-center text-center px-4 ${poppins.className}`}
       style={{ height: 'calc(100vh - 80px)', marginTop: '80px' }}>
       
       {/* Background elements */}
