@@ -86,14 +86,14 @@ export default function Navbar() {
             </Link>
             <Link
               id="services"
-              href="/services"
+              href="/#service"
               onClick={closeMenu}
               className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:pl-2`}
             >
               Services
             </Link>
             <Link
-              href="/how-it-works"
+              href="/#works"
               onClick={closeMenu}
               className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:pl-2`}
             >
@@ -101,7 +101,7 @@ export default function Navbar() {
             </Link>
             <Link
             id="testimonals"
-              href="/testimonials"
+              href="/#testimonials"
               onClick={closeMenu}
               className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:pl-2`}
             >
