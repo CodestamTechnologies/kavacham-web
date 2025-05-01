@@ -1,7 +1,9 @@
 "use client";
 
+
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
+
 
 const poppins = Poppins({
   weight: ['400', '600', '700'],
@@ -13,6 +15,7 @@ export default function AboutSection() {
   const gradientText = " bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
+    
     <section className={`py-5 pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${poppins.className}`}>
       <div className="flex flex-col lg:flex-row items-center gap-1 lg:gap-16">
         {/* Left Column - Image */}
