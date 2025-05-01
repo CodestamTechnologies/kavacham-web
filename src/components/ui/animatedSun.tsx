@@ -1,100 +1,128 @@
-"use client";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+// Animations
+const floatAnimation = keyframes`
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+`;
 
-export default function AnimatedSun() {
-  const [isClient, setIsClient] = useState(false);
+const fadeAnimation = keyframes`
+  0% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.2; }
+`;
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+// Container
+const BackgroundContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+`;
 
-  if (!isClient) return null;
+// Keywords
+const Keyword = styled.div`
+  position: absolute;
+  color: rgba(200, 200, 200, 0.8);
+  font-size: 1.1rem;
+  font-weight: 500;
+  animation: ${floatAnimation} 12s infinite ease-in-out;
+  white-space: nowrap;
+  z-index: 2;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    color: rgba(230, 230, 230, 0.9);
+    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+  }
+`;
+
+// Gray Patches
+const GrayPatch = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(210, 210, 210, 0.08);
+  filter: blur(40px);
+  animation: ${fadeAnimation} 10s infinite ease-in-out;
+  z-index: 1;
+`;
+
+const KeywordsBackground = () => {
+  // Keywords data
+  const keywords = [
+    'Aries', 'Taurus', 'Gemini', 'Leo', 'Virgo', 
+    'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
+    'Sun', 'Moon', 'Mars','Cancer',  'Venus', 'Jupiter', 'Saturn',
+    'Uranus', 'Neptune'
+  ];
+
+  // Keyword positions
+  const keywordPositions = [
+    { left: '8%', top: '12%' }, { left: '22%', top: '28%' },
+    { left: '82%', top: '18%' }, { left: '68%', top: '38%' },
+    { left: '12%', top: '72%' }, { left: '28%', top: '88%' },
+    { left: '78%', top: '78%' }, { left: '88%', top: '65%' },
+    { left: '52%', top: '22%' }, { left: '38%', top: '52%' },
+    { left: '62%', top: '68%' }, { left: '18%', top: '42%' },
+    { left: '92%', top: '32%' }, { left: '8%', top: '82%' },
+    { left: '72%', top: '8%' }, { left: '42%', top: '78%' },
+    { left: '58%', top: '15%' }, { left: '32%', top: '62%' },
+    { left: '85%', top: '45%' }, { left: '15%', top: '55%' }
+  ];
+
+  // Patch positions and sizes
+  const patches = [
+    { size: '320px', left: '18%', top: '28%', delay: '0s' },
+    { size: '420px', left: '72%', top: '62%', delay: '1.5s' },
+    { size: '280px', left: '38%', top: '18%', delay: '0.8s' },
+    { size: '380px', left: '65%', top: '82%', delay: '2.2s' },
+    { size: '350px', left: '25%', top: '65%', delay: '1s' },
+    { size: '400px', left: '55%', top: '35%', delay: '2.5s' },
+    { size: '300px', left: '75%', top: '25%', delay: '0.5s' },
+    { size: '450px', left: '35%', top: '75%', delay: '3s' }
+  ];
 
   return (
-    <div className="relative w-full h-full min-h-[600px] ">
-      <motion.div
-        className="absolute right-[10%] top-1/2 -translate-y-1/2" // Changed to right positioning
-        animate={{
-          x: ["0%", "3%", "0%", "-3%", "0%"], // Adjusted to move around the right position
-          y: ["-50%", "-47%", "-50%", "-53%", "-50%"],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut",
-        }}
-      >
-        <motion.div
-          className="absolute -inset-12 rounded-full bg-pink-400/30 blur-2xl"
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            repeatType: "reverse",
+    <BackgroundContainer>
+      {/* Gray Patches */}
+      {patches.map((patch, index) => (
+        <GrayPatch 
+          key={`patch-${index}`}
+          style={{
+            width: patch.size,
+            height: patch.size,
+            left: patch.left,
+            top: patch.top,
+            animationDelay: patch.delay
           }}
         />
-        <motion.div
-          className="w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#838CF9] to-[#F49AC2] blur-lg opacity-90"
-          animate={{
-            scale: [1, 1.03, 1],
-            opacity: [0.9, 0.95, 0.9],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        >
-          <div className="absolute inset-0 rounded-full bg-white/20 blur-md" />
-        </motion.div>
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] rounded-full bg-gradient-to-br from-[#F49AC2] to-[#838CF9] blur-md opacity-95"
-          animate={{
-            scale: [1, 1.02, 1],
-            rotate: [0, 3, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 1,
-          }}
-        >
-          <div className="absolute top-1/4 left-1/4 w-24 h-24 rounded-full bg-white/30 blur-sm" />
-        </motion.div>
+      ))}
 
-        <motion.div
-          className="absolute top-0 left-1/2 w-5 h-5 rounded-full bg-pink-400/40 blur-sm"
-          animate={{
-            y: [0, 60, 0],
-            opacity: [0.4, 0.7, 0.4],
+      {/* Keywords */}
+      {keywords.map((keyword, index) => (
+        <Keyword 
+          key={`word-${index}`}
+          style={{
+            left: keywordPositions[index].left,
+            top: keywordPositions[index].top,
+            animationDelay: `${index * 0.4}s`,
+            fontSize: index % 2 === 0 ? '1.1rem' : '1.3rem',
+            fontWeight: index % 3 === 0 ? '500' : '600'
           }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-4 h-4 rounded-full bg-pink-400/40 blur-sm"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, 30, 0],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 2,
-          }}
-        />
-      </motion.div>
-    </div>
+        >
+          {keyword}
+        </Keyword>
+      ))}
+    </BackgroundContainer>
   );
-}
+};
+
+export default KeywordsBackground;
