@@ -1,5 +1,5 @@
 import AboutSection from "@/components/main/about";
-import CosmicUpdates from "@/components/main/feature";
+// import CosmicUpdates from "@/components/main/feature";
 import HeroSection from "@/components/main/hero";
 import ServicesSection from "@/components/main/service";
 import TestimonialsPage from "@/components/main/testimonal";
@@ -13,7 +13,7 @@ export default function Home() {
     <ServicesSection/>
     <TestimonialsPage/>
     <HowItWorks/>
-    <CosmicUpdates/>
+    {/* <CosmicUpdates/> */}
     </>
   );
 }
