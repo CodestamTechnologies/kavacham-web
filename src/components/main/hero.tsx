@@ -14,7 +14,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className={`relative h-[60vh] lg:h-[90vh] py-20 px-4 text-center overflow-hidden ${poppins.className}`}
+      className={`relative h-[70vh] lg:h-[90vh] py-20 px-4 text-center overflow-hidden ${poppins.className}`}
     >
       {/* Background image */}
       <div
