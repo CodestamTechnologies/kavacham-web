@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { 
   Home, Users, Star, MessageSquare, BookOpen, 
   Phone, Mail, MapPin,
-  Twitter, Instagram, Facebook, Youtube, Linkedin
+  Twitter, Instagram, Facebook, Youtube, Linkedin,
+  Lock
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -76,9 +77,9 @@ const Footer = () => {
               {[
                 { icon: <Home size={16} className="text-gray-500" />, text: 'Home', href: '/' },
                 { icon: <Users size={16} className="text-gray-500" />, text: 'About Us', href: '/about' },
-                { icon: <Star size={16} className="text-gray-500" />, text: 'Services', href: '/services' },
-                { icon: <MessageSquare size={16} className="text-gray-500" />, text: 'Testimonials', href: '/testimonials' },
-                { icon: <BookOpen size={16} className="text-gray-500" />, text: 'Blog', href: '/blog' },
+                { icon: <Star size={16} className="text-gray-500" />, text: 'Services', href: '/#service' },
+                { icon: <MessageSquare size={16} className="text-gray-500" />, text: 'Testimonials', href: '/#testimonials' },
+                { icon: <Lock size={16} className="text-gray-500" />, text: 'Privacy-Policy', href: '/privacy' },
               ].map((link, index) => (
                 <motion.li 
                   key={index}
@@ -112,7 +113,7 @@ const Footer = () => {
                 <motion.li 
                   key={index}
                   whileHover={hoverAnimation}
-                  className="text-gray-600 hover:text-purple-500 transition-colors cursor-pointer"
+                  className="text-gray-600 hover:text-purple-500 transition-colors cursor-text"
                 >
                   {service}
                 </motion.li>
@@ -134,7 +135,7 @@ const Footer = () => {
                 className="flex items-center gap-2 text-gray-600 hover:text-purple-500 transition-colors"
               >
                 <Mail size={16} className="text-gray-500" />
-                contact@kavacham.com
+                support@kavacham.in
               </motion.li>
               <motion.li 
                 whileHover={hoverAnimation}
@@ -148,7 +149,9 @@ const Footer = () => {
                 className="flex items-center gap-2 text-gray-600 hover:text-purple-500 transition-colors"
               >
                 <MapPin size={16} className="text-gray-500" />
-                123 Cosmic Street, Mystic City
+                Kavacham Technologies,
+ 2nd Floor, Triveni Complex,
+ New Delhi – 110019, India
               </motion.li>
             </ul>
           </motion.div>
@@ -178,12 +181,12 @@ const Footer = () => {
             transition={{ delay: 0.5 }}
             className="flex gap-6"
           >
-            <Link href="/terms" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
-              Terms & Conditions
+            <Link href="/privacy" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
+              Privacy-Policy
             </Link>
-            <Link href="/support" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
+            {/* <Link href="/support" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
               Support
-            </Link>
+            </Link> */}
           </motion.div>
         </div>
       </div>

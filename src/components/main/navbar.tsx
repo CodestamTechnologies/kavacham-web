@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import Image from 'next/image';
 
 const poppins = Poppins({
   weight: ['400', '600'],
@@ -26,40 +27,28 @@ export default function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-around items-center">
-          {/* Logo with Gradient Star */}
-          <Link href="/" className={`${poppins.className} flex items-center text-2xl font-semibold text-gray-800 group`}>
-            <svg
-              className="mr-2 h-8 w-8 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110"
-              viewBox="0 0 24 24"
-              fill="url(#star-gradient)"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#d1b3ff" />
-                  <stop offset="100%" stopColor="#ffb3d1" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M12 2L14.9 8.63L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9.1 8.63L12 2Z"
-                fill="url(#star-gradient)"
-              />
-            </svg>
-            <span>Kavacham</span>
-          </Link>
+        <Link href="/" className={`${poppins.className} flex items-center text-2xl font-semibold text-gray-800 group`}>
+  <Image
+    src="/logo1.png" // Path to your logo
+    alt="Kavacham Logo"
+    width={300}
+    height={62}
+    className="mr-2 lg:h-14 lg:w-64 h-10 w-44 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110"
+  />
+</Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link href="/about" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
               About
             </Link>
-            <Link href="/services" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
+            <Link href="/#service" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
               Services
             </Link>
-            <Link href="/how-it-works" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
+            <Link href="/#works" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
               How It Works
             </Link>
-            <Link href="/testimonials" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
+            <Link href="/#testimonials" className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:-translate-y-0.5`}>
               Testimonials
             </Link>
             <Button
@@ -96,6 +85,7 @@ export default function Navbar() {
               About
             </Link>
             <Link
+              id="services"
               href="/services"
               onClick={closeMenu}
               className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:pl-2`}
@@ -110,6 +100,7 @@ export default function Navbar() {
               How It Works
             </Link>
             <Link
+            id="testimonals"
               href="/testimonials"
               onClick={closeMenu}
               className={`${poppins.className} text-gray-800 hover:text-indigo-600 transition duration-300 hover:pl-2`}
