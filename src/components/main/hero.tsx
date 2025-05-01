@@ -14,7 +14,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className={`relative h-[70vh] lg:h-[90vh] py-20 px-4 text-center overflow-hidden ${poppins.className}`}
+      className={`relative h-[80vh] lg:h-[90vh] py-20 px-4 text-center overflow-hidden ${poppins.className}`}
     >
       {/* Background image */}
       <div
@@ -30,7 +30,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-3xl mx-auto">
         {/* Main Title */}
         <h1
-          className={` sm:mt-8 ${gradientText} text-4xl md:text-5xl font-bold text-black mb-2`}
+          className={` sm:mt-15 mt-6 ${gradientText} text-5xl md:text-7xl font-bold text-black mb-2`}
         >
           Kavacham
         </h1>
