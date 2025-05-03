@@ -62,7 +62,7 @@ export default function HeroSection() {
         </p>
   
         {/* App Store and Google Play buttons */}
-        <div className="flex justify-center gap-4 flex-wrap items-center">
+        <div className="flex lg:flex-row flex-col justify-center gap-4 flex-wrap items-center">
           <a href="#" aria-label="Download on App Store">
             <Image
               src="/app.webp"
@@ -76,9 +76,9 @@ export default function HeroSection() {
             <Image
               src="/play.webp"
               alt="Get it on Google Play"
-              width={190}
+              width={200}
               height={20}
-              className="w-40 sm:w-44 md:w-52 drop-shadow-lg"
+              className="w-42 sm:w-46 md:w-56 drop-shadow-lg"
             />
           </a>
         </div>
