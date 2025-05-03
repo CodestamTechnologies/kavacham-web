@@ -16,9 +16,9 @@ export default function AnimatedSunWithOverlappingImage() {
     <div className="  relative w-full   h-full min-h-[400px] flex items-center justify-center sm:min-h-[600px] sm:ml-10 sm:mt-56">
       {/* Outer container for positioning */}
       <motion.div
-        className="sm:ml-15 ml:0    sm:mt-0 mt-30 overflow-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="    sm:mt-0 mt-30 overflow-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         animate={{
-          x: ["-50%", "-53%", "-50%", "-47%", "-50%"],
+          x: ["-20%", "-30%", "-38%", "-43%", "-40%"],
           y: ["-50%", "-47%", "-50%", "-53%", "-50%"],
         }}
         transition={{

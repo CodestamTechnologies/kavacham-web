@@ -27,13 +27,13 @@ export default function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-around items-center">
-        <Link href="/" className={`${poppins.className} flex items-center text-2xl font-semibold text-gray-800 group`}>
+        <Link href="/" className={`${poppins.className} flex items-center  font-semibold text-gray-800 group`}>
   <Image
     src="/logo1.png" // Path to your logo
     alt="Kavacham Logo"
-    width={300}
-    height={62}
-    className="mr-2 lg:h-14 lg:w-74 h-10 w-44 "
+    width={200}
+    height={22}
+    className="mr-2 lg:h-12 lg:w-42 h-10 w-28 "
   />
 </Link>
 

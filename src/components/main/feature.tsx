@@ -1,6 +1,14 @@
 "use client"
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Poppins } from 'next/font/google';
+
+// Configure Poppins font
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export function CosmicWaitlist() {
   const [email, setEmail] = useState("");
@@ -15,7 +23,7 @@ export function CosmicWaitlist() {
   // };
 
   return (
-    <div className="relative lg:w-[60vw] w-[90vw] m-auto my-12 p-0.5 rounded-xl bg-gradient-to-r from-[#838CF9] to-[#F49AC2]">
+    <div className={`relative lg:w-[60vw] w-[90vw] m-auto my-12 p-0.5 rounded-xl bg-gradient-to-r from-[#838CF9] to-[#F49AC2] ${poppins.className}`}>
       {/* Gradient border */}
       <div className="relative bg-white dark:bg-gray-900 rounded-xl p-8 sm:p-10">
         {/* Floating celestial elements */}
@@ -36,7 +44,7 @@ export function CosmicWaitlist() {
           </p>
 
           {!submitted ? (
-            <form  className="space-y-4">
+            <form className="space-y-4">
               <div className="relative">
                 <input
                   type="email"
