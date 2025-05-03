@@ -1,9 +1,7 @@
 "use client";
-
-
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
-
+import AnimatedSunWithOverlappingImage from '../ui/SunImageAnimation';
 
 const poppins = Poppins({
   weight: ['400', '600', '700'],
@@ -12,27 +10,20 @@ const poppins = Poppins({
 });
 
 export default function AboutSection() {
-  const gradientText = " bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
+  const gradientText = "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    
     <section className={`py-5 pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${poppins.className}`}>
-      <div className="flex flex-col lg:flex-row items-center gap-1 lg:gap-16">
-        {/* Left Column - Image */}
-        <div className="w-full lg:w-1/2 relative">
-          <div className="relative h-80 sm:h-96 lg:h-[500px] w-full">
-            <Image
-              src="/up.png"
-              alt="Kavacham cosmic illustration"
-              fill
-              className="object-contain"
-              // style={{ filter: 'drop-shadow(0 10px 30px rgba(131, 140, 249, 0.3))' }}
-            />
+      <div className="relative flex flex-col lg:flex-row items-center gap-1 lg:gap-16">
+        {/* Left Column - Image (Centered on mobile) */}
+        <div className="w-full flex justify-center lg:w-1/2 lg:block">
+          <div className="relative w-full max-w-[400px] lg:max-w-none">
+            <AnimatedSunWithOverlappingImage />
           </div>
         </div>
 
         {/* Right Column - Content */}
-        <div className="w-full lg:w-1/2 space-y-8">
+        <div className="w-full lg:w-1/2 space-y-8 mt-8 lg:mt-0">
           <h2 className={`text-4xl sm:text-5xl font-bold ${gradientText}`}>
             About Kavacham
           </h2>
