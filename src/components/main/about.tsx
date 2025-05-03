@@ -16,8 +16,8 @@ export default function AboutSection() {
     <section className={`py-5 pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${poppins.className}`}>
       <div className="relative flex flex-col lg:flex-row items-center gap-1 lg:gap-16">
         {/* Left Column - Image (Centered on mobile) */}
-        <div className="w-full flex justify-center lg:w-1/2 lg:block">
-          <div className="relative w-full max-w-[400px] lg:max-w-none">
+        <div className="w-full  flex justify-center  lg:w-1/2 lg:block">
+          <div className="relative  w-full max-w-[400px] lg:max-w-none">
             <AnimatedSunWithOverlappingImage />
           </div>
         </div>
