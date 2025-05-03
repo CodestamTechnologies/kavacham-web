@@ -33,7 +33,7 @@ export default function Navbar() {
     alt="Kavacham Logo"
     width={200}
     height={22}
-    className="mr-2 lg:h-10 lg:w-48 h-10 w-28 "
+    className="mr-2 lg:h-12 lg:w-44 h-10 w-28 "
   />
 </Link>
 
