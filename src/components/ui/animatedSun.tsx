@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 // Animations
 const floatAnimation = keyframes`
   0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(3deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
   100% { transform: translateY(0) rotate(0deg); }
 `;
 
@@ -27,25 +27,30 @@ const BackgroundContainer = styled.div`
   user-select: none;
 `;
 
-// Keywords
+// Keyword
 const Keyword = styled.div`
   position: absolute;
   color: rgba(200, 200, 200, 0.8);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 400;
   animation: ${floatAnimation} 12s infinite ease-in-out;
   white-space: nowrap;
   z-index: 2;
   text-shadow: 0 0 8px rgba(255,255,255,0.3);
   transition: all 0.3s ease;
-  
+
   &:hover {
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 0 12px rgba(255,255,255,0.5);
   }
+
+  @media (max-width: 640px) {
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
 `;
 
-// Gray Patches
+// Gray Patch
 const GrayPatch = styled.div`
   position: absolute;
   border-radius: 50%;
@@ -56,15 +61,14 @@ const GrayPatch = styled.div`
 `;
 
 const KeywordsBackground = () => {
-  // Keywords data
+  // Reduced keyword set for mobile
   const keywords = [
     'Aries', 'Taurus', 'Gemini', 'Leo', 'Virgo', 
-    'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
-    'Sun', 'Moon', 'Mars','Cancer',  'Venus', 'Jupiter', 'Saturn',
-    'Uranus', 'Neptune'
+    'Libra', 'Scorpio', 'Moon', 'Mars', 'Venus',
+    'Jupiter', 'Saturn', 'Sun'
   ];
 
-  // Keyword positions
+  // Matched positions
   const keywordPositions = [
     { left: '8%', top: '12%' }, { left: '22%', top: '28%' },
     { left: '82%', top: '18%' }, { left: '68%', top: '38%' },
@@ -72,13 +76,9 @@ const KeywordsBackground = () => {
     { left: '78%', top: '78%' }, { left: '88%', top: '65%' },
     { left: '52%', top: '22%' }, { left: '78%', top: '52%' },
     { left: '62%', top: '68%' }, { left: '18%', top: '42%' },
-    { left: '92%', top: '32%' }, { left: '8%', top: '82%' },
-    { left: '72%', top: '8%' }, { left: '42%', top: '78%' },
-    { left: '58%', top: '15%' }, { left: '32%', top: '62%' },
-    { left: '85%', top: '45%' }, { left: '15%', top: '55%' }
+    { left: '42%', top: '78%' }
   ];
 
-  // Patch positions and sizes
   const patches = [
     { size: '320px', left: '18%', top: '28%', delay: '0s' },
     { size: '420px', left: '72%', top: '62%', delay: '1.5s' },
@@ -111,11 +111,9 @@ const KeywordsBackground = () => {
         <Keyword 
           key={`word-${index}`}
           style={{
-            left: keywordPositions[index].left,
-            top: keywordPositions[index].top,
-            animationDelay: `${index * 0.4}s`,
-            fontSize: index % 2 === 0 ? '1.1rem' : '1.3rem',
-            fontWeight: index % 3 === 0 ? '500' : '600'
+            left: keywordPositions[index]?.left,
+            top: keywordPositions[index]?.top,
+            animationDelay: `${index * 0.4}s`
           }}
         >
           {keyword}

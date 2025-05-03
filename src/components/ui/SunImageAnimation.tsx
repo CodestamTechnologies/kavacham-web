@@ -27,7 +27,7 @@ export default function AnimatedSunWithOverlappingImage() {
           repeatType: "loop",
           ease: "easeInOut",
         }}
-      >
+     >
         {/* Pink glow border */}
         <motion.div
           className="absolute -inset-8 sm:-inset-12 rounded-full bg-pink-400/30 blur-xl sm:blur-2xl z-0"

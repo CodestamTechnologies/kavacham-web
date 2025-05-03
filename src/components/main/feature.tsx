@@ -1,70 +1,87 @@
-"use client";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Poppins } from "next/font/google";
+"use client"
 import { motion } from "framer-motion";
-import { Mail, Shield } from "lucide-react";
+import { useState } from "react";
 
-const poppins = Poppins({
-  weight: ["400", "600", "700"],
-  subsets: ["latin"],
-});
+export function CosmicWaitlist() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-export default function CosmicUpdates() {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Here you would typically send the email to your backend
+  //   console.log("Submitted email:", email);
+  //   setSubmitted(true);
+  //   setEmail("");
+  // };
+
   return (
-    <div className={`sm:min-h-[70vh] min-h-[60vh] py-12 px-4 sm:px-6 lg:px-8 bg-white ${poppins.className}`}>
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <motion.div
+    <div className="relative lg:w-[60vw] w-[90vw] m-auto my-12 p-0.5 rounded-xl bg-gradient-to-r from-[#838CF9] to-[#F49AC2]">
+      {/* Gradient border */}
+      <div className="relative bg-white dark:bg-gray-900 rounded-xl p-8 sm:p-10">
+        {/* Floating celestial elements */}
+        <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-[#F49AC2]/30 blur-sm" />
+        <div className="absolute -bottom-2 -right-2 w-5 h-5 rounded-full bg-[#838CF9]/30 blur-sm" />
+        
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#B38CF9] to-[#F49AC2] bg-clip-text text-transparent">
-            <span className="font-semibold">Cosmic </span>
-            <span className="font-bold">Updates</span>
-          </h2>
-          <p className="text-gray-600 mt-3 text-base">
-            Subscribe to receive free cosmic insights, astrological tips, and exclusive offers directly to your inbox.
+          <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent mb-2">
+            Cosmic Connection Awaits
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            Join our waitlist to get connected with 60+ top famous psychics when we launch
+          </p>
+
+          {!submitted ? (
+            <form  className="space-y-4">
+              <div className="relative">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full px-5 py-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-[#838CF9] focus:border-transparent dark:bg-gray-800"
+                />
+                <div className="absolute top-0 right-0 h-full flex items-center pr-3 pointer-events-none">
+                  <svg className="w-5 h-5 text-[#F49AC2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                type="submit"
+                className="w-full sm:w-auto px-8 py-3 rounded-lg bg-gradient-to-r from-[#838CF9] to-[#F49AC2] text-white font-medium shadow-lg hover:shadow-xl transition-all"
+              >
+                Join Waitlist
+              </motion.button>
+            </form>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="p-4 rounded-lg bg-[#F49AC2]/10 border border-[#F49AC2]/30"
+            >
+              <p className="text-[#838CF9] font-medium">
+                ✨ Thank you! We'll contact you when we launch. ✨
+              </p>
+            </motion.div>
+          )}
+
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Coming soon to illuminate your cosmic journey
           </p>
         </motion.div>
-
-        {/* Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="rounded-2xl bg-[#F9F9F9] shadow-md p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              {/* Email Input */}
-              <div className="relative w-full">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="pl-10 py-2"
-                />
-              </div>
-
-              {/* Subscribe Button */}
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto bg-gradient-to-r from-[#B38CF9] to-[#F49AC2] text-white font-semibold px-6 py-2 rounded-md shadow-md hover:from-[#A27CE0] hover:to-[#E58AB0]">
-                  Subscribe Now
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Privacy Info */}
-            <div className="mt-6 flex justify-center items-center text-sm text-gray-500 dark:text-gray-400 text-center">
-              <Shield className="h-4 w-4 mr-2" />
-              <span>We respect your privacy. Unsubscribe at any time.</span>
-            </div>
-          </Card>
-        </motion.div>
       </div>
+
+      {/* Animated cosmic particles */}
+      <div className="absolute -top-4 -right-4 w-3 h-3 rounded-full bg-[#838CF9] animate-pulse" />
+      <div className="absolute -bottom-4 -left-4 w-2 h-2 rounded-full bg-[#F49AC2] animate-pulse delay-300" />
     </div>
   );
 }
