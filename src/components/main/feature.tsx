@@ -5,6 +5,7 @@ import { Poppins } from 'next/font/google'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import toast from "react-hot-toast"
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -15,8 +16,60 @@ const poppins = Poppins({
 export function CosmicWaitlist() {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [emailError, setEmailError] = useState("")
 
-  // Fixed positions for particles to avoid SSR issues
+  // Enhanced email validation
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(email)
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setEmail(value)
+    if (emailError) setEmailError("") // Clear error when typing
+  }
+
+  const handleSubmit = async () => {
+    // Validate email format
+    if (!email) {
+      setEmailError("Email is required")
+      toast.error("Please enter your email address")
+      return
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address")
+      toast.error("Please enter a valid email address")
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const response = await fetch('/api/join', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        toast.success("You've been added to the waitlist!")
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to submit')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      toast.error('Something went wrong. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const particles = [
     { color: 'bg-[#838CF9]', position: 'top-4 left-4', size: 'w-2 h-2' },
     { color: 'bg-[#F49AC2]', position: 'bottom-4 right-4', size: 'w-3 h-3' },
@@ -81,23 +134,47 @@ export function CosmicWaitlist() {
                   <Input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmailChange}
+                    onBlur={() => {
+                      if (email && !validateEmail(email)) {
+                        setEmailError("Please enter a valid email address")
+                      }
+                    }}
                     placeholder="Enter your email"
-                    className="w-full px-5 py-6 rounded-lg border border-gray-300 dark:border-gray-700 focus-visible:ring-2 focus-visible:ring-[#838CF9] focus-visible:border-transparent dark:bg-gray-800/80"
+                    className={`w-full px-5 py-6 rounded-lg border ${
+                      emailError ? "border-red-500" : "border-gray-300 dark:border-gray-700"
+                    } focus-visible:ring-2 focus-visible:ring-[#838CF9] focus-visible:border-transparent dark:bg-gray-800/80`}
+                    required
                   />
                   <div className="absolute top-1/2 right-4 transform -translate-y-1/2 pointer-events-none">
                     <svg className="w-5 h-5 text-[#F49AC2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
+                  {emailError && (
+                    <p className="mt-1 text-sm text-red-500 dark:text-red-400">
+                      {emailError}
+                    </p>
+                  )}
                 </div>
                 
                 <div className="flex justify-center">
                   <Button
-                    onClick={() => setSubmitted(true)}
-                    className="px-8 py-6 rounded-lg bg-gradient-to-r from-[#838CF9] to-[#F49AC2] text-white font-medium shadow-lg hover:shadow-xl transition-all"
+                    onClick={handleSubmit}
+                    disabled={isLoading || !email || !!emailError}
+                    className="px-8 py-6 rounded-lg bg-gradient-to-r from-[#838CF9] to-[#F49AC2] text-white font-medium shadow-lg hover:shadow-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Join Waitlist
+                    {isLoading ? (
+                      <span className="flex items-center gap-2">
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Joining...
+                      </span>
+                    ) : (
+                      'Join Waitlist'
+                    )}
                   </Button>
                 </div>
               </motion.div>
@@ -110,6 +187,9 @@ export function CosmicWaitlist() {
                 <div className="text-4xl mb-4">✨</div>
                 <p className="text-[#838CF9] font-medium text-lg">
                   Thank you! We'll contact you when we launch.
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  A confirmation has been sent to {email}
                 </p>
               </motion.div>
             )}

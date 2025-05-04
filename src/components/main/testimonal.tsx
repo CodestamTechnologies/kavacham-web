@@ -188,7 +188,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Mobile Navigation & Indicators */}
-        <div className="mt-8 flex flex-col items-center">
+        <div className="lg:hidden mt-8 flex flex-col items-center">
           <div className="flex gap-2 mb-4">
             {testimonials.map((_, index) => (
               <button

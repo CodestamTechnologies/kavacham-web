@@ -148,7 +148,7 @@ const Footer = () => {
                 whileHover={hoverAnimation}
                 className="flex items-center gap-2 text-gray-600 hover:text-purple-500 transition-colors"
               >
-                <MapPin size={16} className="text-gray-500" />
+                <MapPin size={42} className="text-gray-500" />
                 Kavacham Technologies,
  2nd Floor, Triveni Complex,
  New Delhi – 110019, India

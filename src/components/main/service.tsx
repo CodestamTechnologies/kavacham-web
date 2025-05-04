@@ -1,17 +1,17 @@
 "use client"
 import { motion } from "framer-motion";
 import { Poppins } from 'next/font/google';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent , CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Clock, ThumbsUp, Settings, Star, ArrowRight } from 'lucide-react';
-
+import { Button } from "../ui/button";
 
 const poppins = Poppins({
-    weight: ['400', '600', '700'],
-    subsets: ['latin'],
-    display: 'swap',
-  });
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
-  
+
 const services = [
   {
     icon: <Clock className="w-8 h-8" />,
@@ -43,7 +43,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="service"  className={`py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 ${poppins.className}`}>
+    <section id="service" className={`py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 ${poppins.className}`}>
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -78,12 +78,17 @@ export default function ServicesSection() {
                   </CardDescription>
                 </CardContent>
                 <CardFooter>
-                    <div className="absolute bottom-4 flex flex-row gap-1 justify-center items-center ">
-                    learn more <ArrowRight className="flex justify-center items-center " width={14} height={10} />
-                    </div>
+                <Button 
+  variant="secondary"
+  size="sm"
+  className="absolute bottom-4 gap-1"
+>
+  Learn more
+  <ArrowRight className="h-3.5 w-3.5" />
+</Button>
                 </CardFooter>
               </Card>
-              
+
             </motion.div>
           ))}
         </div>

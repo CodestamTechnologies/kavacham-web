@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { Toaster } from "react-hot-toast";
 import { Inter, Playfair_Display } from 'next/font/google';
 import Navbar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
@@ -62,6 +62,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable}`}>
         <Navbar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
