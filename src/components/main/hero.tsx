@@ -14,7 +14,7 @@ export default function HeroSection() {
     "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    <div className="relative w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full bg-white lg:h-screen h-[60vh] flex items-center justify-center overflow-hidden">
     {/* Full-screen Background Image */}
     <div className="absolute inset-0 z-0">
   <div className="relative w-full h-full">
@@ -44,25 +44,25 @@ export default function HeroSection() {
       <div className="relative z-20 w-full flex flex-col items-center text-center">
         {/* Main Title */}
         <h1
-          className={`${gradientText} text-5xl sm:text-6xl md:text-7xl font-bold mb-2`}
+          className={`${gradientText} text-5xl sm:text-6xl md:text-8xl font-bold mb-2`}
         >
           Kavacham
         </h1>
   
         {/* Subtitle */}
-        <p className="italic text-lg text-black mb-6 drop-shadow-md">
+        <p className="italic text-2xl text-black lg:text-3xl mb-6 drop-shadow-md">
           Astrology That Shields
         </p>
   
         {/* Tagline */}
-        <p className="text-black text-base md:text-lg mb-10 max-w-2xl mx-auto drop-shadow-md">
+        <p className="text-black text-xl md:text-xl mb-10 max-w-2xl mx-auto drop-shadow-md">
           Discover the power of ancient wisdom blended with modern insight.
           Kavacham is your personal astrological guide—crafted with precision,
           purpose, and protection.
         </p>
   
         {/* App Store and Google Play buttons */}
-        <div className="flex lg:flex-row flex-col justify-center gap-4 flex-wrap items-center">
+        {/* <div className="flex lg:flex-row flex-col justify-center gap-4 flex-wrap items-center">
           <a href="#" aria-label="Download on App Store">
             <Image
               src="/app.webp"
@@ -81,7 +81,7 @@ export default function HeroSection() {
               className="w-42 sm:w-46 md:w-56 drop-shadow-lg"
             />
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   </div>
