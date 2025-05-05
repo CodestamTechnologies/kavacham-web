@@ -14,7 +14,7 @@ export default function HeroSection() {
     "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    <div className="relative w-full bg-white lg:h-screen h-[60vh] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
     {/* Full-screen Background Image */}
     <div className="absolute inset-0 z-0">
   <div className="relative w-full h-full">
