@@ -77,16 +77,6 @@ export default function ServicesSection() {
                     {service.description}
                   </CardDescription>
                 </CardContent>
-                <CardFooter>
-                <Button 
-  variant="secondary"
-  size="sm"
-  className="absolute bottom-4 gap-1"
->
-  Learn more
-  <ArrowRight className="h-3.5 w-3.5" />
-</Button>
-                </CardFooter>
               </Card>
 
             </motion.div>
