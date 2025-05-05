@@ -13,12 +13,12 @@ export default function AnimatedSunWithOverlappingImage() {
   if (!isClient) return null;
 
   return (
-    <div className="  relative w-full   h-full min-h-[400px] flex items-center justify-center sm:min-h-[600px] sm:ml-10 sm:mt-56">
+    <div className="  relative w-full   h-full min-h-[300px] flex items-center justify-center sm:min-h-[600px] sm:ml-10 -mt-32 sm:mt-56">
       {/* Outer container for positioning */}
       <motion.div
         className="    sm:mt-0 mt-30 overflow-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         animate={{
-          x: ["-35%", "-40%", "-44%", "-50%", "-50%"],
+          x: ["-10%", "-20%", "-14%", "-20%", "-20%"],
           y: ["-50%", "-47%", "-50%", "-53%", "-50%"],
         }}
         transition={{
@@ -43,7 +43,7 @@ export default function AnimatedSunWithOverlappingImage() {
 
         {/* Larger back circle - responsive sizing */}
         <motion.div
-          className="w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] rounded-full bg-gradient-to-br from-[#838CF9] to-[#F49AC2] blur-md sm:blur-lg opacity-90 z-0"
+          className="w-[170px] h-[170px] sm:w-[340px] sm:h-[340px] rounded-full bg-gradient-to-br from-[#838CF9] to-[#F49AC2] blur-md sm:blur-lg opacity-90 z-0"
           animate={{
             scale: [1, 1.03, 1],
             opacity: [0.9, 0.95, 0.9],
@@ -60,7 +60,7 @@ export default function AnimatedSunWithOverlappingImage() {
 
         {/* Smaller front circle - responsive sizing */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] rounded-full bg-gradient-to-br from-[#F49AC2] to-[#838CF9] blur-sm sm:blur-md opacity-95 z-0"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] rounded-full bg-gradient-to-br from-[#F49AC2] to-[#838CF9] blur-sm sm:blur-md opacity-95 z-0"
           animate={{
             scale: [1, 1.02, 1],
             rotate: [0, 3, 0],
@@ -78,12 +78,12 @@ export default function AnimatedSunWithOverlappingImage() {
 
         {/* Revolving Image - responsive positioning */}
         <motion.div
-          className="absolute -bottom-20 -right-20 sm:-bottom-25 sm:-right-40 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] z-20"
+          className="absolute -bottom-18 -right-10 sm:-bottom-25 sm:-right-40 w-[180px] h-[180px] sm:w-[400px] sm:h-[400px] z-20"
           animate={{
             rotate: 360,
           }}
           transition={{
-            duration: 8,
+            duration: 12,
             repeat: Infinity,
             ease: "linear",
           }}

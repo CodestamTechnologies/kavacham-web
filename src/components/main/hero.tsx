@@ -19,7 +19,7 @@ export default function HeroSection() {
     <div className="absolute inset-0 z-0">
   <div className="relative w-full h-full">
     <Image
-      src="/Kavacham_44.png"
+      src="/Kav23.png"
       alt="Background"
       fill
       className="object-cover opacity-100" 
