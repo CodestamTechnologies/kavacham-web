@@ -78,7 +78,7 @@ export function CosmicWaitlist() {
   ]
 
   return (
-    <section className="w-full bg-gray-50">
+    <section className="w-full z-2 bg-gray-50">
     <div className={` relative max-w-3xl w-[90vw] mx-auto p-5 ${poppins.className}`}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

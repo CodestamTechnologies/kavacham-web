@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className={`bg-gray-50 text-gray-800 ${poppins.className} border-t border-gray-200`}>
+    <footer className={ `z-2 bg-gray-50 text-gray-800 ${poppins.className} border-t border-gray-200`}>
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* Kavacham Branding */}

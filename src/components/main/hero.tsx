@@ -2,8 +2,7 @@
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import KeywordsBackground from "../ui/animatedSun";
-import { motion } from "framer-motion";
-import Link from "next/link";
+
 
 const poppins = Poppins({
   weight: ["400", "600", "700"],
@@ -16,7 +15,7 @@ export default function HeroSection() {
     "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    <div className="sticky top-0 -z-30 w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="sticky top-0 -z-1 w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Full-screen Background Image */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
@@ -44,7 +43,7 @@ export default function HeroSection() {
         <div className="relative z-20 w-full flex flex-col items-center text-center">
           {/* Main Title */}
           <h1
-            className={`${gradientText} text-5xl sm:text-6xl md:text-8xl font-bold mb-2`}
+            className={`${gradientText} text-5xl sm:text-6xl md:text-8xl font-bold mb-2 cursor-text`}
           >
             Kavacham
           </h1>
@@ -61,18 +60,9 @@ export default function HeroSection() {
             purpose, and protection.
           </p>
         
-          <p className="text-2xl mb-4">Astrologers</p>
+         
           
-          <Link href="/astrologer">
-            <motion.button
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#838CF9] to-[#F49AC2] text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-purple-500 cursor-pointer"
-            >
-              Apply Now
-            </motion.button>
-          </Link>
+          
         </div>
       </section>
     </div>

@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 const poppins = Poppins({
   weight: ['400', '600'],
@@ -58,6 +59,14 @@ export default function Navbar() {
             >
               <Link href="/contact">Contact</Link>
             </Button>
+            <Button
+              asChild
+              variant="default"
+              className={`${poppins.className} bg-gradient-to-r from-[#B38CF9] to-[#F49AC2] hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition duration-300 hover:scale-105`}
+            >
+              <Link href="/astrologer">Astrologers</Link>
+            </Button>
+           
           </nav>
 
           {/* Mobile Menu Button */}

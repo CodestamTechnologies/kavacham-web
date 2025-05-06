@@ -91,7 +91,7 @@ export default function TestimonialsSection() {
   return (
     <section 
       id="testimonials" 
-      className={`py-12 md:py-20 px-4 sm:px-6 lg:px-8 ${poppins.className} bg-gray-50 dark:bg-gray-900`}
+      className={`z-2 py-12 md:py-20 px-4 sm:px-6 lg:px-8 ${poppins.className} bg-gray-50 dark:bg-gray-900`}
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
