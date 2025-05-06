@@ -13,7 +13,7 @@ export default function AboutSection() {
   const gradientText = "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    <section className={`py-5 pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${poppins.className}`}>
+    <section className={`py-5 pt-10 px-4 sm:px-6 lg:px-8 max-w-7xl bg-white mx-auto ${poppins.className}`}>
       <div className="relative flex flex-col lg:flex-row items-center gap-1 lg:gap-16">
         {/* Left Column - Image (Centered on mobile) */}
         <div className="w-full  flex justify-center  lg:w-1/2 lg:block">

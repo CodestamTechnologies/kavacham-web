@@ -78,7 +78,8 @@ export function CosmicWaitlist() {
   ]
 
   return (
-    <div className={`relative max-w-3xl w-[90vw] mx-auto my-12 ${poppins.className}`}>
+    <section className="w-full bg-gray-50">
+    <div className={` relative max-w-3xl w-[90vw] mx-auto p-5 ${poppins.className}`}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -206,5 +207,6 @@ export function CosmicWaitlist() {
         </Card>
       </motion.div>
     </div>
+    </section>
   )
 }

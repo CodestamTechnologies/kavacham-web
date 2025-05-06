@@ -2,6 +2,7 @@
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import KeywordsBackground from "../ui/animatedSun";
+import { motion } from "framer-motion";
 
 const poppins = Poppins({
   weight: ["400", "600", "700"],
@@ -14,7 +15,7 @@ export default function HeroSection() {
     "bg-gradient-to-r from-[#838CF9] to-[#F49AC2] bg-clip-text text-transparent";
 
   return (
-    <div className="relative w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="sticky top-0 -z-30 w-full bg-white lg:h-screen h-[80vh] flex items-center justify-center overflow-hidden">
     {/* Full-screen Background Image */}
     <div className="absolute inset-0 z-0">
   <div className="relative w-full h-full">
@@ -60,7 +61,19 @@ export default function HeroSection() {
           Kavacham is your personal astrological guide—crafted with precision,
           purpose, and protection.
         </p>
-  
+      
+
+ <p className="text-2xl">Astrologers</p>
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className="px-8 py-3 rounded-full bg-gradient-to-r from-[#838CF9] to-[#F49AC2] text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-purple-500"
+    >
+      Apply Now
+    </motion.button>
+           
+
         {/* App Store and Google Play buttons */}
         {/* <div className="flex lg:flex-row flex-col justify-center gap-4 flex-wrap items-center">
           <a href="#" aria-label="Download on App Store">
