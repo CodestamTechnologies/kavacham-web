@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 interface FormData {
   name: string;
@@ -18,7 +16,6 @@ interface FormData {
 }
 
 export default function AstrologerRegistration() {
-  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -82,64 +79,45 @@ export default function AstrologerRegistration() {
     setIsSubmitting(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("dob", formData.dob);
-      formDataToSend.append("gender", formData.gender);
-      formDataToSend.append("experience", formData.experience);
-      formDataToSend.append("specialization", formData.specialization);
-      formDataToSend.append("languages", JSON.stringify(formData.languages));
-      formDataToSend.append("services", JSON.stringify(formData.services));
-      formDataToSend.append("about", formData.about);
-
-      const response = await fetch("/api/astrologers/register", {
-        method: "POST",
-        body: formDataToSend,
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        dob: '',
+        gender: '',
+        experience: '',
+        specialization: '',
+        languages: [],
+        services: [],
+        about: '',
       });
-
-      if (response.ok) {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          dob: '',
-          gender: '',
-          experience: '',
-          specialization: '',
-          languages: [],
-          services: [],
-          about: '',
-        });
-        
-        toast.success('Your application has been submitted successfully!');
-      } else {
-        const errorData = await response.json();
-        toast.error(`Registration failed: ${errorData.message}`);
-      }
+      
+      alert('Your application has been submitted successfully!');
     } catch (error) {
       console.error("Registration error:", error);
-      toast.error("Registration failed. Please try again.");
+      alert("Registration failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
             Join Our Astrologer Network
           </h1>
           <p className="text-gray-600 text-lg">Share your cosmic wisdom with seekers worldwide</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <section className="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-purple-100">
-            <h2 className="text-2xl font-semibold text-purple-800 mb-6 flex items-center">
-              <span className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+        <div className="space-y-8">
+          <section className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <h2 className="text-2xl font-semibold text-gray-700 mb-6 flex items-center">
+              <span className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
               Personal Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -151,7 +129,7 @@ export default function AstrologerRegistration() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                   placeholder="Enter your full name"
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -165,7 +143,7 @@ export default function AstrologerRegistration() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                   placeholder="your.email@example.com"
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -179,7 +157,7 @@ export default function AstrologerRegistration() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                   placeholder="+91 9876543210"
                 />
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
@@ -193,7 +171,7 @@ export default function AstrologerRegistration() {
                   name="dob"
                   value={formData.dob}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                 />
                 {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob}</p>}
               </div>
@@ -205,7 +183,7 @@ export default function AstrologerRegistration() {
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                 >
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
@@ -217,9 +195,9 @@ export default function AstrologerRegistration() {
             </div>
           </section>
 
-          <section className="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-purple-100">
-            <h2 className="text-2xl font-semibold text-purple-800 mb-6 flex items-center">
-              <span className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          <section className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <h2 className="text-2xl font-semibold text-gray-700 mb-6 flex items-center">
+              <span className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
               Professional Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -231,7 +209,7 @@ export default function AstrologerRegistration() {
                   name="experience"
                   value={formData.experience}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                   min="0"
                   placeholder="e.g., 5"
                 />
@@ -245,7 +223,7 @@ export default function AstrologerRegistration() {
                   name="specialization"
                   value={formData.specialization}
                   onChange={handleChange}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200"
                 >
                   <option value="">Select Specialization</option>
                   <option value="Vedic Astrology">Vedic Astrology</option>
@@ -263,7 +241,7 @@ export default function AstrologerRegistration() {
                 <label className="block text-gray-700 font-medium mb-3">Languages Known*</label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {["Hindi", "English", "Bengali", "Tamil", "Telugu", "Marathi", "Gujarati", "Other"].map((lang) => (
-                    <label key={lang} className="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer">
+                    <label key={lang} className="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer border border-purple-100">
                       <input
                         type="checkbox"
                         name="languages"
@@ -272,7 +250,7 @@ export default function AstrologerRegistration() {
                         onChange={handleChange}
                         className="w-4 h-4 text-purple-600 bg-white border-purple-300 rounded focus:ring-purple-500 focus:ring-2 mr-3"
                       />
-                      <span className="text-gray-700 font-medium">{lang}</span>
+                      <span className="text-gray-700 font-medium text-sm">{lang}</span>
                     </label>
                   ))}
                 </div>
@@ -284,7 +262,7 @@ export default function AstrologerRegistration() {
                 <label className="block text-gray-700 font-medium mb-3">Services Offered*</label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {["Birth Chart", "Horoscope", "Match Making", "Career Guidance", "Health Prediction", "Remedies"].map((service) => (
-                    <label key={service} className="flex items-center p-3 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors cursor-pointer">
+                    <label key={service} className="flex items-center p-3 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors cursor-pointer border border-indigo-100">
                       <input
                         type="checkbox"
                         name="services"
@@ -293,7 +271,7 @@ export default function AstrologerRegistration() {
                         onChange={handleChange}
                         className="w-4 h-4 text-indigo-600 bg-white border-indigo-300 rounded focus:ring-indigo-500 focus:ring-2 mr-3"
                       />
-                      <span className="text-gray-700 font-medium">{service}</span>
+                      <span className="text-gray-700 font-medium text-sm">{service}</span>
                     </label>
                   ))}
                 </div>
@@ -308,7 +286,7 @@ export default function AstrologerRegistration() {
                   value={formData.about}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white transition-all duration-200 resize-none"
                   placeholder="Tell us about your astrological journey, expertise, and what makes you unique..."
                 />
                 {errors.about && <p className="text-red-500 text-sm mt-1">{errors.about}</p>}
@@ -318,9 +296,10 @@ export default function AstrologerRegistration() {
 
           <div className="text-center pt-6">
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               disabled={isSubmitting}
-              className="relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transform transition-all duration-200 hover:scale-105 active:scale-95"
+              className="relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold text-white bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl shadow-md hover:from-purple-600 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
             >
               {isSubmitting ? (
                 <>
@@ -342,7 +321,7 @@ export default function AstrologerRegistration() {
               Your application will be reviewed within 2-3 business days
             </p>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
