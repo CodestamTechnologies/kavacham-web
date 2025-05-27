@@ -20,7 +20,7 @@ const steps = [
     number: "2",
     title: "Share Birth Details",
     description: "Provide your birth date, time, and location for our astrologers to analyze your unique cosmic blueprint.",
-    icon:     <Calendar className="w-12 h-12 text-pink-300 " />
+    icon: <Calendar className="w-12 h-12 text-pink-300 " />
   },
   {
     number: "3",
@@ -31,6 +31,13 @@ const steps = [
 ];
 
 export default function HowItWorks() {
+  const scrollToWaitlist = () => {
+    const waitlistSection = document.querySelector('[data-section="waitlist"]');
+    if (waitlistSection) {
+      waitlistSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div id="works" className={`z-2 bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 ${poppins.className}`}>
       <div className="max-w-4xl mx-auto">
@@ -96,6 +103,7 @@ export default function HowItWorks() {
           className="text-center mt-12"
         >
           <motion.button 
+            onClick={scrollToWaitlist}
             className="bg-gradient-to-r from-[#B38CF9] to-[#F49AC2] text-white font-semibold py-3 px-8 rounded-full hover:shadow-lg transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
