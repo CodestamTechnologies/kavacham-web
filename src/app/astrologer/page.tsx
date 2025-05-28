@@ -39,6 +39,10 @@ export default function AstrologerRegistration() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -60,13 +64,25 @@ export default function AstrologerRegistration() {
         [name]: value,
       }));
     }
+
+    // Clear specific field error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) newErrors.name = "Name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
     if (!formData.phone.trim()) newErrors.phone = "Phone is required";
     if (!formData.dob) newErrors.dob = "Date of birth is required";
     if (!formData.gender) newErrors.gender = "Gender is required";
@@ -74,7 +90,7 @@ export default function AstrologerRegistration() {
     if (!formData.specialization) newErrors.specialization = "Specialization is required";
     if (formData.languages.length === 0) newErrors.languages = "At least one language is required";
     if (formData.services.length === 0) newErrors.services = "At least one service is required";
-    if (!formData.about.trim()) newErrors.about = "About is required";
+    if (!formData.about.trim()) newErrors.about = "About section is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -83,31 +99,74 @@ export default function AstrologerRegistration() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    console.log('🚀 Form submission started');
+    
+    if (!validateForm()) {
+      console.log('❌ Form validation failed', errors);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please fix the errors in the form before submitting.'
+      });
+      return;
+    }
 
     setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        dob: '',
-        gender: '',
-        experience: '',
-        specialization: '',
-        languages: [],
-        services: [],
-        about: '',
+      console.log('📤 Sending data to API:', formData);
+
+      const response = await fetch('/api/astrologers/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
+
+      console.log('📥 API Response status:', response.status);
       
-      alert('Your application has been submitted successfully!');
+      const result = await response.json();
+      console.log('📥 API Response data:', result);
+
+      if (response.ok && result.success) {
+        console.log('✅ Registration successful');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          dob: '',
+          gender: '',
+          experience: '',
+          specialization: '',
+          languages: [],
+          services: [],
+          about: '',
+        });
+        
+        setSubmitStatus({
+          type: 'success',
+          message: 'Your application has been submitted successfully! You will receive a confirmation email shortly.'
+        });
+
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+      } else {
+        console.error('❌ Registration failed:', result);
+        setSubmitStatus({
+          type: 'error',
+          message: result.message || 'Registration failed. Please try again.'
+        });
+      }
     } catch (error) {
-      console.error("Registration error:", error);
-      alert("Registration failed. Please try again.");
+      console.error("❌ Network error:", error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -136,7 +195,22 @@ export default function AstrologerRegistration() {
           </motion.p>
         </div>
 
-        <div className="space-y-8">
+        {/* Status Message */}
+        {submitStatus.type && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`mb-8 p-4 rounded-lg text-center ${
+              submitStatus.type === 'success' 
+                ? 'bg-green-100 border border-green-400 text-green-700 dark:bg-green-900 dark:border-green-600 dark:text-green-300'
+                : 'bg-red-100 border border-red-400 text-red-700 dark:bg-red-900 dark:border-red-600 dark:text-red-300'
+            }`}
+          >
+            <p className="font-medium">{submitStatus.message}</p>
+          </motion.div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -339,8 +413,7 @@ export default function AstrologerRegistration() {
               </CardContent>
               <CardFooter className="flex flex-col items-center pt-6">
                 <button
-                  type="button"
-                  onClick={handleSubmit}
+                  type="submit"
                   disabled={isSubmitting}
                   className="bg-gradient-to-r from-[#B38CF9] to-[#F49AC2] hover:from-[#A07CE0] hover:to-[#E58FB0] text-white relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold rounded-xl shadow-md focus:outline-none focus:ring-4 focus:ring-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                 >
@@ -366,7 +439,7 @@ export default function AstrologerRegistration() {
               </CardFooter>
             </Card>
           </motion.div>
-        </div>
+        </form>
       </div>
     </section>
   );

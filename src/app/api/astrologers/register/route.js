@@ -20,18 +20,23 @@ export async function POST(request) {
       );
     }
 
-    const formData = await request.formData();
-    console.log('📝 Form data received');
+    // Parse JSON data instead of FormData
+    const data = await request.json();
+    console.log('📝 JSON data received:', data);
     
     // Extract and validate form data
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-    const dob = formData.get('dob');
-    const gender = formData.get('gender');
-    const experience = formData.get('experience');
-    const specialization = formData.get('specialization');
-    const about = formData.get('about');
+    const {
+      name,
+      email,
+      phone,
+      dob,
+      gender,
+      experience,
+      specialization,
+      languages,
+      services,
+      about
+    } = data;
 
     // Validate required fields
     if (!name || !email || !phone || !experience) {
@@ -42,40 +47,32 @@ export async function POST(request) {
       );
     }
 
-    // Parse JSON fields safely
-    let languages = [];
-    let services = [];
-
-    try {
-      const languagesData = formData.get('languages');
-      const servicesData = formData.get('services');
-      
-      if (languagesData) {
-        languages = JSON.parse(languagesData);
-      }
-      if (servicesData) {
-        services = JSON.parse(servicesData);
-      }
-    } catch (jsonError) {
-      console.error('❌ JSON parsing error:', jsonError);
+    // Validate email format
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      console.error('❌ Invalid email format');
       return NextResponse.json(
-        { success: false, message: 'Invalid data format. Please try again.' },
+        { success: false, message: 'Please enter a valid email address.' },
         { status: 400 }
       );
     }
 
+    // Ensure arrays are properly formatted
+    const processedLanguages = Array.isArray(languages) ? languages : [];
+    const processedServices = Array.isArray(services) ? services : [];
+
     // Prepare data for Firebase
     const astrologerData = {
-      name,
-      email,
-      phone,
+      name: name?.trim(),
+      email: email?.trim().toLowerCase(),
+      phone: phone?.trim(),
       dob: dob || null,
       gender: gender || null,
-      experience,
+      experience: experience?.trim(),
       specialization: specialization || null,
-      languages: Array.isArray(languages) ? languages : [],
-      services: Array.isArray(services) ? services : [],
-      about: about || null,
+      languages: processedLanguages,
+      services: processedServices,
+      about: about?.trim() || null,
       registrationDate: serverTimestamp(),
       status: 'pending',
       isActive: false
@@ -96,7 +93,7 @@ export async function POST(request) {
       );
     }
 
-    // Create email transporter (REMOVED DEBUG LOGS)
+    // Create email transporter
     console.log('📧 Setting up email transporter...');
     let transporter;
     try {
@@ -108,7 +105,6 @@ export async function POST(request) {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,
         },
-        // Removed debug and logger options to prevent verbose logging
         tls: {
           rejectUnauthorized: false
         }
@@ -141,8 +137,8 @@ export async function POST(request) {
           <h2 style="color: #0369a1; margin-top: 0;">Professional Information</h2>
           <p><strong>Years of Experience:</strong> ${experience}</p>
           <p><strong>Specialization:</strong> ${specialization || 'Not provided'}</p>
-          <p><strong>Languages Known:</strong> ${languages.length > 0 ? languages.join(', ') : 'Not provided'}</p>
-          <p><strong>Services Offered:</strong> ${services.length > 0 ? services.join(', ') : 'Not provided'}</p>
+          <p><strong>Languages Known:</strong> ${processedLanguages.length > 0 ? processedLanguages.join(', ') : 'Not provided'}</p>
+          <p><strong>Services Offered:</strong> ${processedServices.length > 0 ? processedServices.join(', ') : 'Not provided'}</p>
           <p><strong>About:</strong> ${about || 'Not provided'}</p>
         </div>
         
