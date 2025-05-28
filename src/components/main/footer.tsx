@@ -135,7 +135,7 @@ const Footer = () => {
                 className="flex items-center gap-2 text-gray-600 hover:text-purple-500 transition-colors"
               >
                 <Mail size={16} className="text-gray-500" />
-                support@kavacham.in
+                connect@kavachamtalks.in
               </motion.li>
               <motion.li 
                 whileHover={hoverAnimation}

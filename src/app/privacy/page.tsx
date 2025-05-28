@@ -138,7 +138,7 @@ export default function PrivacyPolicy() {
                 <div className="flex flex-col sm:flex-row items-center gap-4 text-gray-600">
                   <span className="flex items-center gap-2">
                     <Mail className="text-purple-500" />
-                    Email: support@kavacham.in
+                    Email: connect@kavachamtalks.in
                   </span>
                 </div>
                 <p className="mt-4 text-gray-600">

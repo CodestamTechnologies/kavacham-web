@@ -221,7 +221,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium text-gray-900 dark:text-white">Support Email</h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      support@kavacham.in
+                      connect@kavachamtalks.in
                     </p>
                   </div>
                 </div>
