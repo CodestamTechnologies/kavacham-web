@@ -99,9 +99,9 @@ export default function AstrologerRegistration() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    setIsSubmitting(true);
     console.log('🚀 Form submission started');
     
-    setIsSubmitting(true);
     if (!validateForm()) {
       console.log('❌ Form validation failed', errors);
       setIsSubmitting(false);
