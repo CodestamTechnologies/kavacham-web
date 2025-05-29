@@ -350,7 +350,7 @@ export default function AstrologerRegistration() {
                       <option value="Palmistry">Palmistry</option>
                       <option value="Tarot Reading">Tarot Reading</option>
                       <option value="Vastu">Vastu</option>
-                      <option value="other">other</option>
+                      <option value="other">others</option>
                     </select>
                     {errors.specialization && <p className="text-red-500 text-sm mt-1">{errors.specialization}</p>}
                   </div>
