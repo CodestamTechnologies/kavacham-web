@@ -101,8 +101,10 @@ export default function AstrologerRegistration() {
 
     console.log('🚀 Form submission started');
     
+    setIsSubmitting(true);
     if (!validateForm()) {
       console.log('❌ Form validation failed', errors);
+      setIsSubmitting(false);
       setSubmitStatus({
         type: 'error',
         message: 'Please fix the errors in the form before submitting.'
@@ -110,7 +112,6 @@ export default function AstrologerRegistration() {
       return;
     }
 
-    setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
     try {
