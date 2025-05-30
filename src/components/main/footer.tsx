@@ -79,7 +79,6 @@ const Footer = () => {
                 { icon: <Users size={16} className="text-gray-500" />, text: 'About Us', href: '/about' },
                 { icon: <Star size={16} className="text-gray-500" />, text: 'Services', href: '/#service' },
                 { icon: <MessageSquare size={16} className="text-gray-500" />, text: 'Testimonials', href: '/#testimonials' },
-                { icon: <Lock size={16} className="text-gray-500" />, text: 'Privacy-Policy', href: '/privacy' },
               ].map((link, index) => (
                 <motion.li 
                   key={index}
@@ -165,28 +164,45 @@ const Footer = () => {
           className="my-8 h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent"
         />
 
-        {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-gray-500 text-sm"
-          >
-            © Kavacham. All rights reserved.
-          </motion.p>
+        {/* Copyright and Bottom Section */}
+        <div className="space-y-4">
+          {/* Copyright and Privacy Policy Row */}
+          <div className="flex justify-between items-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-500 text-sm"
+            >
+              © Kavacham. All rights reserved.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="pr-4"
+            >
+              <Link href="/privacy" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
+                Privacy-Policy
+              </Link>
+            </motion.div>
+          </div>
+          
+          {/* Developer Credit Row */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="flex gap-6"
+            transition={{ delay: 0.6 }}
+            className="text-left"
           >
-            <Link href="/privacy" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
-              Privacy-Policy
-            </Link>
-            {/* <Link href="/support" className="text-gray-500 hover:text-purple-500 text-sm transition-colors">
-              Support
-            </Link> */}
+            <a 
+              href="https://codestam.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs text-gray-400 hover:text-purple-500 transition-colors underline-offset-2 hover:underline inline-block"
+            >
+              Designed and Developed By Codestam
+            </a>
           </motion.div>
         </div>
       </div>
