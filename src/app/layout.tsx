@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Inter, Playfair_Display } from 'next/font/google';
-import Navbar from "@/components/main/navbar";
-import Footer from "@/components/main/footer";
+import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -60,10 +59,10 @@ export default function RootLayout({
         <link rel="icon" href="/img45.png" />
       </head>
       <body className={`${inter.variable} ${playfair.variable}`}>
-        <Navbar />
-        {children}
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
         <Toaster />
-        <Footer />
       </body>
     </html>
   );
