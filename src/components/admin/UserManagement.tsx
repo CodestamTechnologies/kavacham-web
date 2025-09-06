@@ -127,32 +127,9 @@ export default function UserManagement() {
         status: user.status
       });
     } else if (action === 'history') {
-      // Simulate fetching consultation history for this user
-      const mockHistory = [
-        {
-          id: "1",
-          astrologerName: "Dr. Rajesh Kumar",
-          astrologerEmail: "rajesh.kumar@email.com",
-          consultationDate: "2024-01-15",
-          consultationType: "Vedic Astrology",
-          duration: "45 minutes",
-          fee: 500,
-          rating: 5,
-          status: "completed"
-        },
-        {
-          id: "2",
-          astrologerName: "Meera Patel",
-          astrologerEmail: "meera.patel@email.com",
-          consultationDate: "2024-01-10",
-          consultationType: "Tarot Reading",
-          duration: "30 minutes",
-          fee: 400,
-          rating: 4,
-          status: "completed"
-        }
-      ];
-      setConsultationHistory(mockHistory);
+      // In a real application, you would fetch consultation history from Firebase
+      // For now, set empty array - this would be replaced with actual data fetching
+      setConsultationHistory([]);
     }
     setShowModal(true);
   };

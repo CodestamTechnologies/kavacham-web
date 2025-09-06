@@ -4,58 +4,50 @@ import { collection, getDocs, query, where, orderBy, limit } from 'firebase/fire
 
 export async function GET() {
   try {
-    // In a real application, you would fetch this data from your database
-    // For now, we'll return mock data that matches the structure expected by the dashboard
+    // Fetch real data from Firebase collections
+    const [usersSnapshot, astrologersSnapshot, waitlistSnapshot] = await Promise.all([
+      getDocs(collection(db, 'users')),
+      getDocs(collection(db, 'astrologers')),
+      getDocs(collection(db, 'waitlist'))
+    ]);
+
+    const totalUsers = usersSnapshot.size;
+    const totalAstrologers = astrologersSnapshot.size;
+    const waitlistSignups = waitlistSnapshot.size;
+
+    // Get recent activities from waitlist (most recent signups)
+    const recentActivities = [];
+    const recentWaitlistQuery = query(
+      collection(db, 'waitlist'),
+      orderBy('joinedAt', 'desc'),
+      limit(5)
+    );
+    const recentWaitlistSnapshot = await getDocs(recentWaitlistQuery);
     
+    recentWaitlistSnapshot.forEach((doc, index) => {
+      const data = doc.data();
+      recentActivities.push({
+        id: index + 1,
+        action: "Waitlist signup",
+        user: data.email,
+        time: data.joinedAt ? new Date(data.joinedAt.toDate()).toLocaleString() : "Recently",
+        type: "waitlist"
+      });
+    });
+
     const dashboardStats = {
-      totalUsers: 1247,
-      totalAstrologers: 23,
-      totalVisitors: 8934,
-      activeConsultations: 45,
-      waitlistSignups: 567,
-      monthlyGrowth: 23.5,
-      recentActivities: [
-        {
-          id: 1,
-          action: "New user registered",
-          user: "Priya Sharma",
-          time: "2 minutes ago",
-          type: "user"
-        },
-        {
-          id: 2,
-          action: "Astrologer consultation completed",
-          user: "Dr. Rajesh Kumar",
-          time: "15 minutes ago",
-          type: "consultation"
-        },
-        {
-          id: 3,
-          action: "New astrologer application",
-          user: "Meera Patel",
-          time: "1 hour ago",
-          type: "astrologer"
-        },
-        {
-          id: 4,
-          action: "Waitlist signup",
-          user: "Amit Singh",
-          time: "2 hours ago",
-          type: "waitlist"
-        },
-        {
-          id: 5,
-          action: "User profile updated",
-          user: "Sunita Devi",
-          time: "3 hours ago",
-          type: "user"
-        }
-      ],
+      totalUsers,
+      totalAstrologers,
+      totalVisitors: 0, // This would need to be tracked separately
+      activeConsultations: 0, // This would need a consultations collection
+      waitlistSignups,
+      monthlyGrowth: 0, // This would need historical data calculation
+      recentActivities,
       quickStats: {
-        websiteTraffic: 8900,
-        consultationsToday: 23,
-        averageRating: 4.8,
-        monthlyRevenue: 240000
+        websiteTraffic: 0, // This would need analytics integration
+        consultationsToday: 0, // This would need a consultations collection
+        averageRating: 0, // This would need ratings data
+        monthlyRevenue: 0 // This would need payment/revenue tracking
       }
     };
 

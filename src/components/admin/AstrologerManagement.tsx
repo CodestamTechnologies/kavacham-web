@@ -58,43 +58,8 @@ export default function AstrologerManagement() {
         console.log("Raw Firebase astrologers data:", firebaseAstrologers);
         
         if (!firebaseAstrologers || firebaseAstrologers.length === 0) {
-          console.log("No astrologers found in Firebase, using mock data");
-          // Fallback to mock data if no Firebase data
-          const mockAstrologers: Astrologer[] = [
-            {
-              id: "mock-1",
-              name: "Dr. Rajesh Kumar",
-              email: "rajesh.kumar@email.com",
-              phone: "+91 98765 43210",
-              specialization: ["Vedic Astrology", "Numerology"],
-              experience: 15,
-              rating: 4.8,
-              totalConsultations: 1250,
-              status: "active",
-              joinedDate: "2023-01-15",
-              location: "Mumbai, Maharashtra",
-              profileImage: "/api/placeholder/100/100",
-              languages: ["Hindi", "English"],
-              consultationFee: 500
-            },
-            {
-              id: "mock-2",
-              name: "Meera Patel",
-              email: "meera.patel@email.com",
-              phone: "+91 87654 32109",
-              specialization: ["Tarot Reading", "Crystal Healing"],
-              experience: 8,
-              rating: 4.6,
-              totalConsultations: 890,
-              status: "pending",
-              joinedDate: "2023-03-22",
-              location: "Delhi, India",
-              profileImage: "/api/placeholder/100/100",
-              languages: ["Hindi", "English"],
-              consultationFee: 400
-            }
-          ];
-          setAstrologers(mockAstrologers);
+          console.log("No astrologers found in Firebase");
+          setAstrologers([]);
           setLoading(false);
           return;
         }
@@ -150,26 +115,8 @@ export default function AstrologerManagement() {
         console.error("Error fetching astrologers:", error);
         setLoading(false);
         
-        // Fallback to mock data on error
-        const mockAstrologers: Astrologer[] = [
-          {
-            id: "error-fallback-1",
-            name: "Sample Astrologer (Error Fallback)",
-            email: "sample@email.com",
-            phone: "+91 12345 67890",
-            specialization: ["Vedic Astrology"],
-            experience: 5,
-            rating: 4.0,
-            totalConsultations: 100,
-            status: "active",
-            joinedDate: "2024-01-01",
-            location: "Sample City",
-            profileImage: "/api/placeholder/100/100",
-            languages: ["English"],
-            consultationFee: 300
-          }
-        ];
-        setAstrologers(mockAstrologers);
+        // Set empty array on error
+        setAstrologers([]);
       }
     };
 
@@ -202,32 +149,9 @@ export default function AstrologerManagement() {
         status: astrologer.status
       });
     } else if (action === 'history') {
-      // Simulate fetching consultation history for this astrologer
-      const mockHistory = [
-        {
-          id: "1",
-          userName: "Priya Sharma",
-          userEmail: "priya.sharma@email.com",
-          consultationDate: "2024-01-15",
-          consultationType: "Vedic Astrology",
-          duration: "45 minutes",
-          fee: 500,
-          rating: 5,
-          status: "completed"
-        },
-        {
-          id: "2",
-          userName: "Amit Kumar",
-          userEmail: "amit.kumar@email.com",
-          consultationDate: "2024-01-10",
-          consultationType: "Career Guidance",
-          duration: "30 minutes",
-          fee: 400,
-          rating: 4,
-          status: "completed"
-        }
-      ];
-      setConsultationHistory(mockHistory);
+      // In a real application, you would fetch consultation history from Firebase
+      // For now, set empty array - this would be replaced with actual data fetching
+      setConsultationHistory([]);
     }
     setShowModal(true);
   };

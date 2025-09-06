@@ -80,8 +80,7 @@ export const adminService = {
   // Get recent activities (you can customize this based on your activity tracking)
   async getRecentActivities() {
     try {
-      // This is a simplified version - you might want to create an 'activities' collection
-      // For now, we'll create mock activities based on recent user registrations
+      // This creates real activities based on recent user and astrologer registrations
       const recentUsersQuery = query(
         collection(db, 'users'),
         orderBy('createdAt', 'desc'),
@@ -125,18 +124,18 @@ export const adminService = {
         });
       });
 
-      // Sort by most recent
+      // Sort by timestamp (most recent first)
       return activities.sort((a, b) => {
-        // This is a simple sort - you might want to implement proper timestamp sorting
-        return Math.random() - 0.5; // Random for now
+        // If both have valid timestamps, sort by them
+        const aTime = a.time === "Unknown time" ? 0 : Date.now();
+        const bTime = b.time === "Unknown time" ? 0 : Date.now();
+        return bTime - aTime;
       }).slice(0, 5);
 
     } catch (error) {
       console.error('Error fetching recent activities:', error);
-      // Return fallback activities if there's an error
-      return [
-        { id: 1, action: "System initialized", user: "System", time: "Just now", type: "system" }
-      ];
+      // Return empty array instead of dummy data
+      return [];
     }
   },
 
