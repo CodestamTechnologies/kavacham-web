@@ -14,6 +14,7 @@ const poppins = Poppins({
 interface FormData {
   name: string;
   email: string;
+  password: string;
   phone: string;
   dob: string;
   gender: string;
@@ -22,12 +23,21 @@ interface FormData {
   languages: string[];
   services: string[];
   about: string;
+  address: string;
+  education: string;
+  certifications: string;
+  hourlyRate: string;
+  photoURL: string;
+  displayName: string;
+  workingHours: string;
+  availableForCalls: boolean;
 }
 
 export default function AstrologerRegistration() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    password: "",
     phone: "",
     dob: "",
     gender: "",
@@ -36,6 +46,14 @@ export default function AstrologerRegistration() {
     languages: [],
     services: [],
     about: "",
+    address: "",
+    education: "",
+    certifications: "",
+    hourlyRate: "",
+    photoURL: "",
+    displayName: "",
+    workingHours: "",
+    availableForCalls: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,6 +100,11 @@ export default function AstrologerRegistration() {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
+    }
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
     }
     if (!formData.phone.trim()) newErrors.phone = "Phone is required";
     if (!formData.dob) newErrors.dob = "Date of birth is required";
@@ -137,6 +160,7 @@ export default function AstrologerRegistration() {
         setFormData({
           name: '',
           email: '',
+          password: '',
           phone: '',
           dob: '',
           gender: '',
@@ -145,11 +169,19 @@ export default function AstrologerRegistration() {
           languages: [],
           services: [],
           about: '',
+          address: '',
+          education: '',
+          certifications: '',
+          hourlyRate: '',
+          photoURL: '',
+          displayName: '',
+          workingHours: '',
+          availableForCalls: false,
         });
         
         setSubmitStatus({
           type: 'success',
-          message: 'Your application has been submitted successfully! You will receive a confirmation email shortly.'
+          message: 'Your application has been submitted successfully!'
         });
 
         // Scroll to top to show success message
@@ -256,6 +288,20 @@ export default function AstrologerRegistration() {
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
 
+                  {/* Password */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password*</label>
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      placeholder="Enter your password (min. 6 characters)"
+                    />
+                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+                  </div>
+
                   {/* Phone */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number*</label>
@@ -298,6 +344,48 @@ export default function AstrologerRegistration() {
                       <option value="Other">Other</option>
                     </select>
                     {errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender}</p>}
+                  </div>
+
+                  {/* Address */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      placeholder="Enter your address"
+                    />
+                    {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+                  </div>
+
+                  {/* Display Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Display Name</label>
+                    <input
+                      type="text"
+                      name="displayName"
+                      value={formData.displayName}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      placeholder="Name to display publicly"
+                    />
+                    {errors.displayName && <p className="text-red-500 text-sm mt-1">{errors.displayName}</p>}
+                  </div>
+
+                  {/* Photo URL */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Profile Photo URL</label>
+                    <input
+                      type="url"
+                      name="photoURL"
+                      value={formData.photoURL}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      placeholder="https://example.com/photo.jpg"
+                    />
+                    {errors.photoURL && <p className="text-red-500 text-sm mt-1">{errors.photoURL}</p>}
                   </div>
                 </div>
               </CardContent>
@@ -396,6 +484,82 @@ export default function AstrologerRegistration() {
                       ))}
                     </div>
                     {errors.services && <p className="text-red-500 text-sm mt-2">{errors.services}</p>}
+                  </div>
+
+                  {/* Education */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Education</label>
+                    <textarea
+                      name="education"
+                      value={formData.education}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200 resize-none"
+                      placeholder="Enter your educational background and qualifications..."
+                    />
+                    {errors.education && <p className="text-red-500 text-sm mt-1">{errors.education}</p>}
+                  </div>
+
+                  {/* Certifications */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Certifications</label>
+                    <textarea
+                      name="certifications"
+                      value={formData.certifications}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200 resize-none"
+                      placeholder="List your certifications, courses, and training..."
+                    />
+                    {errors.certifications && <p className="text-red-500 text-sm mt-1">{errors.certifications}</p>}
+                  </div>
+
+                  {/* Hourly Rate */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hourly Rate (INR)</label>
+                    <input
+                      type="number"
+                      name="hourlyRate"
+                      value={formData.hourlyRate}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      min="0"
+                      placeholder="e.g., 500"
+                    />
+                    {errors.hourlyRate && <p className="text-red-500 text-sm mt-1">{errors.hourlyRate}</p>}
+                  </div>
+
+                  {/* Working Hours */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Working Hours</label>
+                    <input
+                      type="text"
+                      name="workingHours"
+                      value={formData.workingHours}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-800 dark:text-white transition-all duration-200"
+                      placeholder="e.g., 9 AM - 6 PM IST"
+                    />
+                    {errors.workingHours && <p className="text-red-500 text-sm mt-1">{errors.workingHours}</p>}
+                  </div>
+
+                  {/* Available for Calls */}
+                  <div className="md:col-span-2">
+                    <label className="flex items-center p-3 bg-purple-50 dark:bg-gray-800 rounded-lg hover:bg-purple-100 dark:hover:bg-gray-700 transition-colors cursor-pointer border border-purple-100 dark:border-gray-600">
+                      <input
+                        type="checkbox"
+                        name="availableForCalls"
+                        checked={formData.availableForCalls}
+                        onChange={(e) => {
+                          setFormData(prev => ({
+                            ...prev,
+                            availableForCalls: e.target.checked
+                          }));
+                        }}
+                        className="w-4 h-4 text-purple-600 bg-white border-purple-300 rounded focus:ring-purple-500 focus:ring-2 mr-3"
+                      />
+                      <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">Available for phone/video calls</span>
+                    </label>
                   </div>
 
                   {/* About */}
